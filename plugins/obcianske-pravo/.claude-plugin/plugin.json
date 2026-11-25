@@ -1,0 +1,7 @@
+{
+  "name": "obcianske-pravo",
+  "description": "Skills pre slovenské občianske právo (zákon č. 40/1964 Zb.).",
+  "version": "0.1.0",
+  "author": { "name": "lexomat-ai" },
+  "license": "MIT"
+}

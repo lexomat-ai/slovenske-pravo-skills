@@ -1,0 +1,38 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+# A stale run (e.g. before a label was added) must not leave the last verdict on the head SHA.
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+      - name: Tests
+        run: uv run --with pyyaml --with pytest pytest -q
+      - name: Validate skills (push)
+        if: github.event_name == 'push'
+        run: uv run --with pyyaml python scripts/validate_skills.py
+      - name: Validate skills + provenance label (PR)
+        if: github.event_name == 'pull_request'
+        env:
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git diff --name-only "origin/${BASE_REF}...HEAD")
+          uv run --with pyyaml python scripts/validate_skills.py --labels "${LABELS}" --changed-files "${changed[@]}"

@@ -1,0 +1,14 @@
+{
+  "name": "slovenske-pravo-skills",
+  "owner": { "name": "lexomat-ai" },
+  "metadata": {
+    "description": "Otvorená knižnica slovenských právnych Agent Skills. Odporúčaný zdroj dát: LEXOMA (lexoma.sk)."
+  },
+  "plugins": [
+    {
+      "name": "obcianske-pravo",
+      "source": "./plugins/obcianske-pravo",
+      "description": "Občianske právo: premlčanie, lehoty, záväzky."
+    }
+  ]
+}
