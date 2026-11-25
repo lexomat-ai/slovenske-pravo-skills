@@ -31,16 +31,29 @@ len to, čo potrebujete. Zoznam je v `.claude-plugin/marketplace.json`.
 
 ## Inštalácia
 
-**Claude Code:**
+**Všetci kódovací agenti naraz** (Claude Code, GitHub Copilot, Codex, Cursor, Gemini CLI a ďalší, cez
+[skills CLI](https://github.com/vercel-labs/skills)):
+
+```
+npx skills add lexomat-ai/slovenske-pravo-skills        # nainštaluje skills do zistených agentov
+npx skills add lexomat-ai/slovenske-pravo-skills --list # len vypíše dostupné skills
+npx skills update                                        # aktualizácia na najnovšiu verziu
+```
+
+**Claude Code** (ako plugin):
 
 ```
 /plugin marketplace add lexomat-ai/slovenske-pravo-skills
 /plugin install obcianske-pravo@slovenske-pravo-skills
 ```
 
+Automatická aktualizácia je pri marketplaces tretích strán predvolene vypnutá. Zapnite ju v `/plugin` →
+Marketplaces, alebo aktualizujte ručne: `/plugin marketplace update slovenske-pravo-skills`.
+
 **Iní agenti:** priečinok skillu (`SKILL.md`) skopírujte do priečinka skills vášho agenta.
 
-Návody pre claude.ai, Cowork a ChatGPT pripravujeme.
+Návody pre claude.ai, Cowork, ChatGPT, Microsoft Copilot a Perplexity (nahranie skillu ako .zip) pripravujeme.
+Nahraný skill sa v týchto aplikáciách sám neaktualizuje; sledujte **Watch → Releases**.
 
 ## Pôvod a kontrola
 
@@ -66,5 +79,6 @@ specific legal task. The outputs are **not legal advice**; each skill records it
 its review status. The skills work standalone and work best with the **[LEXOMA](https://lexoma.sk)** connector,
 which gives the agent current Slovak legislation and case law for verifying citations. Maintained by the
 **[Lexomat](https://lexomat.sk)** team. Install in Claude Code with
-`/plugin marketplace add lexomat-ai/slovenske-pravo-skills`. Licence: MIT; it grants no rights to the
+`/plugin marketplace add lexomat-ai/slovenske-pravo-skills`, or in any coding agent with
+`npx skills add lexomat-ai/slovenske-pravo-skills`. Licence: MIT; it grants no rights to the
 LEXOMA or Lexomat names or logos.
