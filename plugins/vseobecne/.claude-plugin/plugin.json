@@ -1,0 +1,9 @@
+{
+  "name": "vseobecne",
+  "description": "Všeobecné skills pre prácu so slovenskými právnymi zdrojmi.",
+  "version": "0.1.0",
+  "author": {
+    "name": "lexomat-ai"
+  },
+  "license": "MIT"
+}

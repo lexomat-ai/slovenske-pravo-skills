@@ -1,0 +1,9 @@
+{
+  "name": "ustavne-pravo",
+  "description": "Skills pre slovenské ústavné právo a verejného ochrancu práv.",
+  "version": "0.1.0",
+  "author": {
+    "name": "lexomat-ai"
+  },
+  "license": "MIT"
+}
