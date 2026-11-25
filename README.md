@@ -27,7 +27,14 @@ len to, čo potrebujete. Zoznam je v `.claude-plugin/marketplace.json`.
 
 | Odvetvie | Skills |
 |---|---|
-| obcianske-pravo | `kontrola-premlcania` |
+| obcianske-pravo | `kontrola-premlcania`, `lehoty-v-civilnom-konani`, `urok-z-omeskania` |
+| trestne-pravo | `lehoty-v-trestnom-konani`, `premlcanie-trestneho-stihania` |
+| pracovne-pravo | `skoncenie-pracovneho-pomeru` |
+| spravne-pravo | `lehoty-v-spravnom-konani`, `spravna-zaloba` |
+| ustavne-pravo | `ustavna-staznost`, `podnet-verejnemu-ochrancovi-prav` |
+| vseobecne | `overenie-citacii` |
+
+Všetky skills sú zatiaľ `ai-generated` a `unreviewed`; ich odborná kontrola prebieha.
 
 ## Inštalácia
 

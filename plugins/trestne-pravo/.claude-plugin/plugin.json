@@ -1,0 +1,9 @@
+{
+  "name": "trestne-pravo",
+  "description": "Skills pre slovenské trestné právo (zákon č. 300/2005 Z. z., zákon č. 301/2005 Z. z.).",
+  "version": "0.1.0",
+  "author": {
+    "name": "lexomat-ai"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "pracovne-pravo",
+  "description": "Skills pre slovenské pracovné právo (zákon č. 311/2001 Z. z.).",
+  "version": "0.1.0",
+  "author": {
+    "name": "lexomat-ai"
+  },
+  "license": "MIT"
+}

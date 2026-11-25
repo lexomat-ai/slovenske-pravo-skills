@@ -1,6 +1,8 @@
 {
   "name": "slovenske-pravo-skills",
-  "owner": { "name": "lexomat-ai" },
+  "owner": {
+    "name": "lexomat-ai"
+  },
   "metadata": {
     "description": "Otvorená knižnica slovenských právnych Agent Skills. Odporúčaný zdroj dát: LEXOMA (lexoma.sk)."
   },
@@ -8,7 +10,32 @@
     {
       "name": "obcianske-pravo",
       "source": "./plugins/obcianske-pravo",
-      "description": "Občianske právo: premlčanie, lehoty, záväzky."
+      "description": "Občianske právo: premlčanie, lehoty v civilnom konaní, úrok z omeskania."
+    },
+    {
+      "name": "trestne-pravo",
+      "source": "./plugins/trestne-pravo",
+      "description": "Trestné právo: lehoty v trestnom konaní, premlčanie trestného stíhania."
+    },
+    {
+      "name": "pracovne-pravo",
+      "source": "./plugins/pracovne-pravo",
+      "description": "Pracovné právo: skončenie pracovného pomeru."
+    },
+    {
+      "name": "spravne-pravo",
+      "source": "./plugins/spravne-pravo",
+      "description": "Správne právo: lehoty v správnom konaní, správna žaloba."
+    },
+    {
+      "name": "ustavne-pravo",
+      "source": "./plugins/ustavne-pravo",
+      "description": "Ústavné právo: ústavná sťažnosť, podnet verejnému ochrancovi práv."
+    },
+    {
+      "name": "vseobecne",
+      "source": "./plugins/vseobecne",
+      "description": "Všeobecné: overenie právnych citácií."
     }
   ]
 }

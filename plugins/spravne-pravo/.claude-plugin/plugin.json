@@ -1,0 +1,9 @@
+{
+  "name": "spravne-pravo",
+  "description": "Skills pre slovenské správne právo (zákon č. 71/1967 Zb., zákon č. 162/2015 Z. z.).",
+  "version": "0.1.0",
+  "author": {
+    "name": "lexomat-ai"
+  },
+  "license": "MIT"
+}
