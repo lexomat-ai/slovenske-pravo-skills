@@ -97,6 +97,8 @@ OZ nepoužíva pojem „prerušenie“. Rozlišuj tieto situácie:
 - Pri vzájomnom vrátení plnení z neplatnej alebo zrušenej zmluvy súd na námietku prihliadne len vtedy, ak by premlčanie mohol namietať aj druhý účastník (§ 107 ods. 3 OZ).
 - Spotrebiteľská zmluva: premlčané právo nemožno vymáhať ani platne zabezpečiť. Zmeniť jeho obsah, nahradiť ho novým právom alebo obnoviť jeho vymáhateľnosť možno len právnym úkonom dlžníka, ktorý o premlčaní vedel (§ 54a OZ). Ak je dlžníkom spotrebiteľ, výslovne na to upozorni a odporuč overiť aj predpisy o ochrane spotrebiteľa, ktoré tento skill nepokrýva.
 
+OZ (zákon č. 40/1964 Zb.) je zrušený novým Občianskym zákonníkom (zákon č. 260/2026 Z. z.) s účinnosťou od 1. 7. 2027. Ak premlčacia doba plynie k tomuto dňu alebo začne plynúť neskôr, upozorni, že premlčanie treba overiť podľa nového zákonníka a jeho prechodných ustanovení; tento skill ich nepokrýva.
+
 ## Overenie
 
 Pred odoslaním odpovede over aktuálne znenie každého ustanovenia, ktoré cituješ.
