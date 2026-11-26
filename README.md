@@ -59,7 +59,9 @@ Marketplaces, alebo aktualizujte ručne: `/plugin marketplace update slovenske-p
 
 **Iní agenti:** priečinok skillu (`SKILL.md`) skopírujte do priečinka skills vášho agenta.
 
-Návody pre claude.ai, Cowork, ChatGPT, Microsoft Copilot a Perplexity (nahranie skillu ako .zip) pripravujeme.
+**Aplikácie s nahrávaním súboru** (claude.ai, Cowork, ChatGPT, Microsoft Copilot, Perplexity): stiahnite si zip
+z [najnovšieho vydania](https://github.com/lexomat-ai/slovenske-pravo-skills/releases/latest), `<skill>.zip`
+pre jeden skill alebo `oblast-<oblasť>.zip` pre celú oblasť, a nahrajte ho v nastaveniach skillov aplikácie.
 Nahraný skill sa v týchto aplikáciách sám neaktualizuje; sledujte **Watch → Releases**.
 
 ## Pôvod a kontrola
@@ -87,5 +89,6 @@ its review status. The skills work standalone and work best with the **[LEXOMA](
 which gives the agent current Slovak legislation and case law for verifying citations. Maintained by the
 **[Lexomat](https://lexomat.sk)** team. Install in Claude Code with
 `/plugin marketplace add lexomat-ai/slovenske-pravo-skills`, or in any coding agent with
-`npx skills add lexomat-ai/slovenske-pravo-skills`. Licence: MIT; it grants no rights to the
+`npx skills add lexomat-ai/slovenske-pravo-skills`. For upload-only apps (claude.ai, ChatGPT, Microsoft Copilot,
+Perplexity) download a zip from the [latest release](https://github.com/lexomat-ai/slovenske-pravo-skills/releases/latest). Licence: MIT; it grants no rights to the
 LEXOMA or Lexomat names or logos.
