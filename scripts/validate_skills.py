@@ -10,6 +10,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 import yaml
@@ -18,13 +19,18 @@ NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 PROVENANCE = {"ai-generated", "ai-assisted", "human"}
 REVIEW_STATUS = {"unreviewed", "reviewed"}
 DISCLAIMER = "nie je právna rada"
+# Accepts singular/plural and the instrumental form, across a line break.
+DISCLAIMER_RE = re.compile(
+    r"nie\s+(?:je|sú)\s+(?:právna\s+rada|právnou\s+radou|právne\s+rady|právnymi\s+radami)"
+)
 AI_LABEL = "ai-generated"
 SKILL_PATH_RE = re.compile(r"^plugins/([^/]+)/skills/([^/]+)/")
 
 
 def _parse(skill_md: Path) -> tuple[dict[str, object] | None, str, str | None]:
     """Return (frontmatter, body, error)."""
-    text = skill_md.read_text(encoding="utf-8")
+    # utf-8-sig drops a leading BOM; NFC makes decomposed diacritics match.
+    text = unicodedata.normalize("NFC", skill_md.read_text(encoding="utf-8-sig"))
     lines = text.splitlines()
     if not lines or lines[0].strip() != "---":
         return None, "", "frontmatter must start with '---' on the first line"
@@ -58,7 +64,10 @@ def validate_skill(skill_md: Path) -> list[str]:
         errors.append("description must be a non-empty string of at most 1024 characters")
 
     meta = data.get("metadata")
-    if not isinstance(meta, dict):
+    if meta is None:
+        errors.append("metadata is missing (required: provenance, generated_by for ai-*, review_status)")
+        meta = {}
+    elif not isinstance(meta, dict):
         errors.append("metadata must be a mapping")
         meta = {}
     for key, value in meta.items():
@@ -78,7 +87,7 @@ def validate_skill(skill_md: Path) -> list[str]:
     elif status == "reviewed" and not meta_s.get("reviewed_by", "").strip():
         errors.append("metadata.reviewed_by is required when review_status is reviewed")
 
-    if DISCLAIMER not in body.lower():
+    if not DISCLAIMER_RE.search(body.lower()):
         errors.append(f"body must contain '{DISCLAIMER}'")
 
     return [f"{skill_md}: {e}" for e in errors]
@@ -150,7 +159,7 @@ def validate_layout(root: Path) -> list[str]:
 
 def check_pr_labels(changed_files: list[str], labels: list[str], root: Path) -> list[str]:
     skills = sorted({m.group(0) for f in changed_files if (m := SKILL_PATH_RE.match(f))})
-    has_label = AI_LABEL in labels
+    has_label = AI_LABEL in {label.lower() for label in labels}  # GitHub labels ignore case
     errors: list[str] = []
     for skill_dir in skills:
         skill_md = root / skill_dir / "SKILL.md"

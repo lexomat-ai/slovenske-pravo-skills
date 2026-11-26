@@ -175,3 +175,53 @@ def test_marketplace_malformed_shapes(tmp_path: Path) -> None:
         mp.write_text(bad)
         errs = validate_marketplace(tmp_path)
         assert errs and all(e.startswith(str(mp)) for e in errs), bad
+
+
+# --- robustness (review follow-ups) ---
+
+def test_bom_prefixed_file_passes(tmp_path: Path) -> None:
+    p = make_skill(tmp_path, "p", "s-bom")
+    p.write_bytes(b"\xef\xbb\xbf" + p.read_bytes())
+    assert validate_skill(p) == []
+
+
+def test_crlf_line_endings_pass(tmp_path: Path) -> None:
+    p = make_skill(tmp_path, "p", "s-crlf")
+    p.write_bytes(p.read_bytes().replace(b"\n", b"\r\n"))
+    assert validate_skill(p) == []
+
+
+def test_decomposed_unicode_disclaimer_passes(tmp_path: Path) -> None:
+    import unicodedata
+    body = unicodedata.normalize("NFD", "\nTento výstup nie je právna rada.\n")
+    assert validate_skill(make_skill(tmp_path, "p", "s-nfd", body=body)) == []
+
+
+def test_disclaimer_variants_pass(tmp_path: Path) -> None:
+    for i, body in enumerate([
+        "\nVýstupy nie sú právna rada.\n",
+        "\nTento výstup nie je právnou radou.\n",
+        "\nTento výstup nie je\nprávna rada.\n",
+    ]):
+        assert validate_skill(make_skill(tmp_path, "p", f"s-var{i}", body=body)) == [], body
+
+
+def test_negated_disclaimer_still_required(tmp_path: Path) -> None:
+    errs = validate_skill(make_skill(tmp_path, "p", "s-none", body="\nToto je právna rada.\n"))
+    assert any("nie je právna rada" in e for e in errs)
+
+
+def test_missing_metadata_has_clear_message(tmp_path: Path) -> None:
+    raw = "---\nname: s-nometa\ndescription: d\n---\nnie je právna rada\n"
+    errs = validate_skill(make_skill(tmp_path, "p", "s-nometa", raw=raw))
+    assert any("metadata is missing" in e for e in errs)
+
+
+def test_label_match_ignores_case(tmp_path: Path) -> None:
+    make_skill(tmp_path, "p", "s-ai")
+    assert check_pr_labels(["plugins/p/skills/s-ai/SKILL.md"], ["AI-Generated"], tmp_path) == []
+
+
+def test_workflow_diff_keeps_non_ascii_paths_unquoted() -> None:
+    wf = (Path(__file__).parents[1] / ".github" / "workflows" / "validate.yml").read_text(encoding="utf-8")
+    assert "core.quotepath=false" in wf

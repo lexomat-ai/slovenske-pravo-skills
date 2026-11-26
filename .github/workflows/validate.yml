@@ -34,5 +34,5 @@ jobs:
           BASE_REF: ${{ github.base_ref }}
         run: |
           set -euo pipefail
-          mapfile -t changed < <(git diff --name-only "origin/${BASE_REF}...HEAD")
+          mapfile -t changed < <(git -c core.quotepath=false diff --name-only "origin/${BASE_REF}...HEAD")
           uv run --with pyyaml python scripts/validate_skills.py --labels "${LABELS}" --changed-files "${changed[@]}"
